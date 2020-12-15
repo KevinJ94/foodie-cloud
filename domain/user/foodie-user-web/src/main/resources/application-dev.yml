@@ -1,0 +1,94 @@
+server:
+  port: 10002
+
+spring:
+
+#  redis:
+#    database: 1
+#    host: 192.168.235.140
+#    port: 6379
+#    password: china666
+#  redis:
+#    database: 1
+#    password: china666
+#    sentinel:
+#      master: mymaster
+#      nodes: 192.168.1.191:26379,192.168.1.192:26379,192.168.1.193:26379
+  redis:
+    password: china666
+    cluster:
+      nodes: 192.168.199.101:6379,192.168.199.102:6379, 192.168.199.103:6379, 192.168.199.104:6379, 192.168.199.105:6379, 192.168.199.106:6379
+
+  ### 推送变更的时候用
+  rabbitmq:
+    host: 192.168.199.101
+    port: 5672
+    username: guest
+    password: guest
+
+
+  datasource:                                           # 数据源的相关配置
+    #url: jdbc:mysql://192.168.199.106:8066/food-shop?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    url: ${mysqldb.url}
+    username: root
+    password: root
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      #user.password: elastic:china666
+      cluster-name: food-shop-elasticsearch
+      cluster-nodes: 192.168.199.200:9300
+
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+## 开启所有actuator-endpoint
+#management:
+#  endpoint:
+#    health:
+#      show-details: always
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  #        include: health, info, xxxx
+#  security:
+#    enabled: false
+
+#hystrix:
+#  command:
+#    # 有的属性是默认值，写不写都行
+#    default:
+#      fallback:
+#        enabled: true
+#      circuitBreaker:
+#        enabled: true
+#        # 超过50%错误，那么开启熔断
+#        errorThresholdPercentage: 50
+#        # 5个request之后才进行统计
+#        requestVolumeThreshold: 5
+#        # 10秒之后进入半开状态
+#        sleepWindowInMilliseconds: 10000
+#        # forceClosed, forceOpen 强制关闭/开启熔断开关
+#      execution:
+#        timeout:
+#          enabled: true
+#        # 可以指定隔离方式是线程池还是信号量
+#        isolation:
+#          thread:
+#            interruptOnTimeout: true
+#            interruptOnFutureCancel: true
+#            timeoutInMilliseconds: 10000
+#      metrics:
+#        rollingStats:
+#          # 时间窗口统计
+#          timeInMilliseconds: 20000
+          # numBuckets: 10
+    #        rollingPercentile:
+    #          # 时间窗口统计
+    #          timeInMilliseconds: 20000
+    #          # numBuckets: 10
+    #          bucketSize: 300
+    # 照这个方法，覆盖其他的属性

@@ -1,0 +1,26 @@
+server:
+  port: 10006
+
+spring:
+  application:
+    name: foodie-auth-service
+  redis:
+    password: china666
+    cluster:
+      nodes: 192.168.199.101:6379,192.168.199.102:6379, 192.168.199.103:6379, 192.168.199.104:6379, 192.168.199.105:6379, 192.168.199.106:6379
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  security:
+    enabled: false

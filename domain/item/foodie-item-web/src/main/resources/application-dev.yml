@@ -1,0 +1,69 @@
+server:
+  port: 10001
+
+spring:
+
+#  redis:
+#    database: 1
+#    host: 192.168.235.140
+#    port: 6379
+#    password: china666
+#  redis:
+#    database: 1
+#    password: china666
+#    sentinel:
+#      master: mymaster
+#      nodes: 192.168.1.191:26379,192.168.1.192:26379,192.168.1.193:26379
+  redis:
+    password: china666
+    cluster:
+      nodes: 192.168.199.101:6379,192.168.199.102:6379, 192.168.199.103:6379, 192.168.199.104:6379, 192.168.199.105:6379, 192.168.199.106:6379
+
+
+#  session:
+#    store-type: redis
+
+
+#  rabbitmq:
+#    host: 192.168.199.101
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtualHost: /
+#    publisher-returns: true
+#    publisher-confirms: true
+#    template:
+#      mandatory: true
+#    listener:
+#      simple:
+#        default-requeue-rejected: false
+
+
+  datasource:                                           # 数据源的相关配置
+    url: jdbc:mysql://192.168.199.106:8066/food-shop?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    username: root
+    password: root
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      #user.password: elastic:china666
+      cluster-name: food-shop-elasticsearch
+      cluster-nodes: 192.168.199.200:9300
+
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+## 开启所有actuator-endpoint
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  #        include: health, info, xxxx
+  security:
+    enabled: false
